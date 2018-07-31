@@ -27,7 +27,7 @@
                         </div>
                         <div class="form-group">
                             <label>Brand</label>
-                            {{ Form::select('brand',  ['1', '2', '3', '4', '5'], null,['class' => 'form-control', 'placeholder'=>'Brand']) }}
+                            {{ Form::select('brand',  ['1', '2', '3', '4', '5', '6'], null,['class' => 'form-control', 'placeholder'=>'Brand']) }}
                         </div>
 
                         <div class="form-group">
