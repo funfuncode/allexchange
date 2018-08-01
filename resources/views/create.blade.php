@@ -8,72 +8,34 @@
     <div class="container">
 
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-3">
 
-                <form action="{{action('PhotoController@store')}}" method="post">
+                <form method="post" class="dropzone" id="dropzone1">
                     {{Form::token()}}
-                    <div class="form-group">
-                        <label>Type</label>
-                        <input type="text" class="form-control" id="type" placeholder="Enter type">
-                    </div>
-                    <div class="form-group">
-                        <label>Brand</label>
-                        {{ Form::select('brand',  ['1', '2', '3', '4', '5', '6'], null,['class' => 'form-control', 'placeholder'=>'Brand']) }}
-                    </div>
 
-                    <div class="row my-4">
-                        <div class="col-md-4">
-
-                            <p id="dropzone1" class="dropzone"></p>
-                            <p class="text-center">Вид спереди</p>
-
-                        </div>
-
-                        <div class="col-md-4">
-
-                            <p id="dropzone2" class="dropzone"></p>
-                            <p class="text-center">Вид сзади</p>
-
-                        </div>
-
-                        <div class="col-md-4">
-
-                            <p id="dropzone3" class="dropzone"></p>
-                            <p class="text-center">Вид сбоку</p>
-
-                        </div>
-
-                        <div class="col-md-3">
-
-                            <p id="dropzone4" class="dropzone"></p>
-                            <p class="text-center">Вид 4</p>
-
-                        </div>
-
-                        <div class="col-md-3">
-
-                            <p id="dropzone5" class="dropzone"></p>
-                            <p class="text-center">Вид 5</p>
-
-                        </div>
-
-                        <div class="col-md-3">
-
-                            <p id="dropzone6" class="dropzone"></p>
-                            <p class="text-center">Вид 6</p>
-
-                        </div>
-                        <div class="col-md-3">
-
-                            <p id="dropzone7" class="dropzone"></p>
-                            <p class="text-center">Вид 7</p>
-
-                        </div>
-                    </div>
+                </form>
             </div>
 
-                    <input class="btn btn-primary" id="submitAll" name="submit" type="submit"
-                           value="Submit" />
+            <div class="col-md-3">
+
+                <form method="post" class="dropzone" id="dropzone2">
+                    {{Form::token()}}
+
+                </form>
+            </div>
+
+            <div class="col-md-3">
+
+                <form method="post" class="dropzone" id="dropzone3">
+                    {{Form::token()}}
+
+                </form>
+            </div>
+
+            <div class="col-md-3">
+
+                <form method="post" class="dropzone" id="dropzone4">
+                    {{Form::token()}}
 
                 </form>
             </div>
@@ -95,42 +57,75 @@
             // Now that the DOM is fully loaded, create the dropzone, and setup the
             // event listeners
             var myDropzone1 = new Dropzone("#dropzone1", {
-                url: "/file-upload",
-                maxFiles: 5,
-                dictDefaultMessage: "Загрузите вид устройства спереди"
+                url: "/photos",
+                maxFiles: 1,
+                dictDefaultMessage: "Загрузите вид устройства спереди",
+                paramName: "file1"
+            });
+
+            var myDropzone2 = new Dropzone("#dropzone2", {
+                url: "/photos",
+                maxFiles: 1,
+                dictDefaultMessage: "Загрузите вид устройства сзади",
+                paramName: "file2"
+            });
+
+            var myDropzone3 = new Dropzone("#dropzone3", {
+                url: "/photos",
+                maxFiles: 1,
+                dictDefaultMessage: "Загрузите вид устройства сбоку",
+                paramName: "file3"
+            });
+
+            var myDropzone4 = new Dropzone("#dropzone4", {
+                url: "/photos",
+                maxFiles: 1,
+                dictDefaultMessage: "Загрузите вид устройства сверху",
+                paramName: "file4"
+            });
+
+
+
+            /*var myDropzone1 = new Dropzone("#dropzone1", {
+                url: "/photos",
+                maxFiles: 1,
+                dictDefaultMessage: "Загрузите вид устройства спереди",
+                paramName: "file1"
             });
             var myDropzone2 = new Dropzone("#dropzone2", {
-                url: "/file-upload",
+                url: "/photos",
                 maxFiles: 1,
-                dictDefaultMessage: "Загрузите вид устройства сзади"
+                dictDefaultMessage: "Загрузите вид устройства сзади",
+                paramName: "file2"
             });
             var myDropzone3 = new Dropzone("#dropzone3", {
-                url: "/file-upload",
+                url: "/photos",
                 maxFiles: 1,
-                dictDefaultMessage: "Загрузите вид устройства сбоку"
+                dictDefaultMessage: "Загрузите вид устройства сбоку",
+                paramName: "file3"
             });
 
 
             var myDropzone4 = new Dropzone("#dropzone4", {
-                url: "/file-upload",
+                url: "/photos",
                 maxFiles: 1,
                 dictDefaultMessage: "Вид 4"
             });
             var myDropzone5 = new Dropzone("#dropzone5", {
-                url: "/file-upload",
+                url: "/photos",
                 maxFiles: 1,
                 dictDefaultMessage: "Вид 5"
             });
             var myDropzone6 = new Dropzone("#dropzone6", {
-                url: "/file-upload",
+                url: "/photos",
                 maxFiles: 1,
                 dictDefaultMessage: "Вид 6"
             });
             var myDropzone7 = new Dropzone("#dropzone7", {
-                url: "/file-upload",
+                url: "/photos",
                 maxFiles: 1,
                 dictDefaultMessage: "Вид 7"
-            });
+            });*/
 
         });
     </script>

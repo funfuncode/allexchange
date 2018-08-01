@@ -10481,6 +10481,15 @@ a.text-dark:focus {
   border: 2px dashed #0087F7;
   border-radius: 5px;
   background: white;
+  text-align: center;
+}
+
+.dropzone .dz-preview {
+  vertical-align: middle;
+}
+
+.dropzone .dz-message {
+  margin: 3em 0;
 }
 
 /*
