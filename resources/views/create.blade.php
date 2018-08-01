@@ -43,24 +43,30 @@
 
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
 
                             <p id="dropzone4" class="dropzone"></p>
                             <p class="text-center">Вид 4</p>
 
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
 
                             <p id="dropzone5" class="dropzone"></p>
                             <p class="text-center">Вид 5</p>
 
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
 
                             <p id="dropzone6" class="dropzone"></p>
                             <p class="text-center">Вид 6</p>
+
+                        </div>
+                        <div class="col-md-3">
+
+                            <p id="dropzone7" class="dropzone"></p>
+                            <p class="text-center">Вид 7</p>
 
                         </div>
                     </div>
@@ -119,6 +125,11 @@
                 url: "/file-upload",
                 maxFiles: 1,
                 dictDefaultMessage: "Вид 6"
+            });
+            var myDropzone7 = new Dropzone("#dropzone7", {
+                url: "/file-upload",
+                maxFiles: 1,
+                dictDefaultMessage: "Вид 7"
             });
 
         });

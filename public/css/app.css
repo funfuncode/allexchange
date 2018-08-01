@@ -10483,3 +10483,16 @@ a.text-dark:focus {
   background: white;
 }
 
+/*
+.dropzone .dz-preview {
+  height: 100%;
+}
+.dropzone .dz-preview .dz-image {
+  height: 100%;
+}
+
+.dropzone .dz-preview .dz-image img[data-dz-thumbnail] {
+  height: 100%;
+}
+*/
+
