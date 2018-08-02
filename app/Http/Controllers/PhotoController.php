@@ -51,6 +51,8 @@ class PhotoController extends Controller
             Photo::create(['fileName'=>$name]);
         }
 
+        return $request->device_type;
+
     }
 
     /**

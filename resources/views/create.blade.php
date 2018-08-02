@@ -7,39 +7,93 @@
 @section('content')
     <div class="container">
 
-        <div class="row">
-            <div class="col-md-3">
+        <div class="col-md-12">
 
-                <form method="post" class="dropzone" id="dropzone1">
-                    {{Form::token()}}
+            <form action="{{action('PhotoController@store')}}" method="post">
+                {{Form::token()}}
+                <div class="form-group">
+                    <label>Тип устройства</label>
+                    {{ Form::select('device_type',  ['Phone' => 'Phone', 'Tablet' => 'Tablet', 'Gadget' => 'Gadget'], 0,['class' => 'form-control', 'placeholder'=>'Тип устройства']) }}
+                </div>
+                <div class="form-group">
+                    <label>Бренд</label>
+                    {{ Form::select('brand',  ['Apple', 'Samsung', 'Nomi', 'Xiaomi', 'Asus', 'LG'], 0,['class' => 'form-control', 'placeholder'=>'Бренд']) }}
+                </div>
 
-                </form>
-            </div>
+                <div class="form-group">
+                    <label>Модель</label>
+                    {{ Form::select('model',  ['A5', 'X10', 'F4', 'G7', 'D1', 'P15'], null,['class' => 'form-control', 'placeholder'=>'Модель']) }}
+                </div>
 
-            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Категория</label>
+                    {{ Form::select('category',  ['K1', 'K2', 'K3', 'K4', 'K5'], null,['class' => 'form-control', 'placeholder'=>'Категория']) }}
+                </div>
 
-                <form method="post" class="dropzone" id="dropzone2">
-                    {{Form::token()}}
+                <div class="row my-4">
+                    <div class="col-md-3">
 
-                </form>
-            </div>
+                        <p id="dropzone1" class="dropzone"></p>
+                        <p class="text-center">Вид спереди</p>
 
-            <div class="col-md-3">
+                    </div>
 
-                <form method="post" class="dropzone" id="dropzone3">
-                    {{Form::token()}}
+                    <div class="col-md-3">
 
-                </form>
-            </div>
+                        <p id="dropzone2" class="dropzone"></p>
+                        <p class="text-center">Вид сзади</p>
 
-            <div class="col-md-3">
+                    </div>
 
-                <form method="post" class="dropzone" id="dropzone4">
-                    {{Form::token()}}
+                    <div class="col-md-3">
 
-                </form>
-            </div>
+                        <p id="dropzone3" class="dropzone"></p>
+                        <p class="text-center">Вид сбоку</p>
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <p id="dropzone4" class="dropzone"></p>
+                        <p class="text-center">Вид 4</p>
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <p id="dropzone5" class="dropzone"></p>
+                        <p class="text-center">Вид 5</p>
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <p id="dropzone6" class="dropzone"></p>
+                        <p class="text-center">Вид 6</p>
+
+                    </div>
+                    <div class="col-md-3">
+
+                        <p id="dropzone7" class="dropzone"></p>
+                        <p class="text-center">Вид 7</p>
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <p id="dropzone8" class="dropzone"></p>
+                        <p class="text-center">Вид 8</p>
+
+                    </div>
+                </div>
+
+                <input class="btn btn-primary" id="submitAll" name="submit" type="submit"
+                       value="Submit"/>
+
+            </form>
+
         </div>
+
 
     </div>
 
@@ -57,75 +111,85 @@
             // Now that the DOM is fully loaded, create the dropzone, and setup the
             // event listeners
             var myDropzone1 = new Dropzone("#dropzone1", {
-                url: "/photos",
+                url: "/allexchange/public/photos",
                 maxFiles: 1,
                 dictDefaultMessage: "Загрузите вид устройства спереди",
-                paramName: "file1"
+                paramName: "file1",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
             });
 
             var myDropzone2 = new Dropzone("#dropzone2", {
-                url: "/photos",
+                url: "/allexchange/public/photos",
                 maxFiles: 1,
                 dictDefaultMessage: "Загрузите вид устройства сзади",
-                paramName: "file2"
+                paramName: "file2",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
             });
 
             var myDropzone3 = new Dropzone("#dropzone3", {
-                url: "/photos",
+                url: "/allexchange/public/photos",
                 maxFiles: 1,
                 dictDefaultMessage: "Загрузите вид устройства сбоку",
-                paramName: "file3"
+                paramName: "file3",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
             });
 
             var myDropzone4 = new Dropzone("#dropzone4", {
-                url: "/photos",
+                url: "/allexchange/public/photos",
                 maxFiles: 1,
                 dictDefaultMessage: "Загрузите вид устройства сверху",
-                paramName: "file4"
+                paramName: "file4",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
             });
 
 
-
-            /*var myDropzone1 = new Dropzone("#dropzone1", {
-                url: "/photos",
-                maxFiles: 1,
-                dictDefaultMessage: "Загрузите вид устройства спереди",
-                paramName: "file1"
-            });
-            var myDropzone2 = new Dropzone("#dropzone2", {
-                url: "/photos",
-                maxFiles: 1,
-                dictDefaultMessage: "Загрузите вид устройства сзади",
-                paramName: "file2"
-            });
-            var myDropzone3 = new Dropzone("#dropzone3", {
-                url: "/photos",
-                maxFiles: 1,
-                dictDefaultMessage: "Загрузите вид устройства сбоку",
-                paramName: "file3"
-            });
-
-
-            var myDropzone4 = new Dropzone("#dropzone4", {
-                url: "/photos",
-                maxFiles: 1,
-                dictDefaultMessage: "Вид 4"
-            });
             var myDropzone5 = new Dropzone("#dropzone5", {
-                url: "/photos",
+                url: "/allexchange/public/photos",
                 maxFiles: 1,
-                dictDefaultMessage: "Вид 5"
+                dictDefaultMessage: "Загрузите фото 5",
+                paramName: "file5",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
             });
+
             var myDropzone6 = new Dropzone("#dropzone6", {
-                url: "/photos",
+                url: "/allexchange/public/photos",
                 maxFiles: 1,
-                dictDefaultMessage: "Вид 6"
+                dictDefaultMessage: "Загрузите фото 6",
+                paramName: "file6",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
             });
+
             var myDropzone7 = new Dropzone("#dropzone7", {
-                url: "/photos",
+                url: "/allexchange/public/photos",
                 maxFiles: 1,
-                dictDefaultMessage: "Вид 7"
-            });*/
+                dictDefaultMessage: "Загрузите фото 7",
+                paramName: "file7",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            var myDropzone8 = new Dropzone("#dropzone8", {
+                url: "/allexchange/public/photos",
+                maxFiles: 1,
+                dictDefaultMessage: "Загрузите фото 8",
+                paramName: "file8",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
 
         });
     </script>

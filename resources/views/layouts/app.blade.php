@@ -18,7 +18,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Dropzone css -->
-    @yield('styles')
+    <link href="{{ asset('css/dropzone.css') }}" rel="stylesheet">
 
 
     <!-- Styles -->
