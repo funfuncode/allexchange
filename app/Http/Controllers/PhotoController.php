@@ -24,7 +24,7 @@ class PhotoController extends Controller
      */
     public function create()
     {
-        return view('create');
+
     }
 
     /**
@@ -50,8 +50,6 @@ class PhotoController extends Controller
 
             Photo::create(['fileName'=>$name]);
         }
-
-        return $request->device_type;
 
     }
 

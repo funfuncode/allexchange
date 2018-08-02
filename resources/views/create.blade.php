@@ -9,25 +9,29 @@
 
         <div class="col-md-12">
 
-            <form action="{{action('PhotoController@store')}}" method="post">
+            <form action="{{action('PostsController@store')}}" method="post">
                 {{Form::token()}}
                 <div class="form-group">
                     <label>Тип устройства</label>
-                    {{ Form::select('device_type',  ['Phone' => 'Phone', 'Tablet' => 'Tablet', 'Gadget' => 'Gadget'], 0,['class' => 'form-control', 'placeholder'=>'Тип устройства']) }}
+                    <select name="device_type" class="form-control">
+                        <option>Phone</option>
+                        <option>Tablet</option>
+                        <option>Gadget</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label>Бренд</label>
-                    {{ Form::select('brand',  ['Apple', 'Samsung', 'Nomi', 'Xiaomi', 'Asus', 'LG'], 0,['class' => 'form-control', 'placeholder'=>'Бренд']) }}
+                    {{ Form::select('brand',  [], 0,['class' => 'form-control', 'placeholder'=>'Бренд']) }}
                 </div>
 
                 <div class="form-group">
                     <label>Модель</label>
-                    {{ Form::select('model',  ['A5', 'X10', 'F4', 'G7', 'D1', 'P15'], null,['class' => 'form-control', 'placeholder'=>'Модель']) }}
+                    {{ Form::select('model',  [], null,['class' => 'form-control', 'placeholder'=>'Модель']) }}
                 </div>
 
                 <div class="form-group">
                     <label>Категория</label>
-                    {{ Form::select('category',  ['K1', 'K2', 'K3', 'K4', 'K5'], null,['class' => 'form-control', 'placeholder'=>'Категория']) }}
+                    {{ Form::select('category',  [], null,['class' => 'form-control', 'placeholder'=>'Категория']) }}
                 </div>
 
                 <div class="row my-4">
@@ -110,87 +114,226 @@
         $(function () {
             // Now that the DOM is fully loaded, create the dropzone, and setup the
             // event listeners
+
+            //const url = "/allexchange/public/photos";
+            const url = "/photos";
+            const xsrf_token_headers = { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') };
+
             var myDropzone1 = new Dropzone("#dropzone1", {
-                url: "/allexchange/public/photos",
+                url: url,
                 maxFiles: 1,
                 dictDefaultMessage: "Загрузите вид устройства спереди",
                 paramName: "file1",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
+                headers: xsrf_token_headers
             });
 
             var myDropzone2 = new Dropzone("#dropzone2", {
-                url: "/allexchange/public/photos",
+                url: url,
                 maxFiles: 1,
                 dictDefaultMessage: "Загрузите вид устройства сзади",
                 paramName: "file2",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
+                headers: xsrf_token_headers
             });
 
             var myDropzone3 = new Dropzone("#dropzone3", {
-                url: "/allexchange/public/photos",
+                url: url,
                 maxFiles: 1,
                 dictDefaultMessage: "Загрузите вид устройства сбоку",
                 paramName: "file3",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
+                headers: xsrf_token_headers
             });
 
             var myDropzone4 = new Dropzone("#dropzone4", {
-                url: "/allexchange/public/photos",
+                url: url,
                 maxFiles: 1,
                 dictDefaultMessage: "Загрузите вид устройства сверху",
                 paramName: "file4",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
+                headers: xsrf_token_headers
             });
 
 
             var myDropzone5 = new Dropzone("#dropzone5", {
-                url: "/allexchange/public/photos",
+                url: url,
                 maxFiles: 1,
                 dictDefaultMessage: "Загрузите фото 5",
                 paramName: "file5",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
+                headers: xsrf_token_headers
             });
 
             var myDropzone6 = new Dropzone("#dropzone6", {
-                url: "/allexchange/public/photos",
+                url: url,
                 maxFiles: 1,
                 dictDefaultMessage: "Загрузите фото 6",
                 paramName: "file6",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
+                headers: xsrf_token_headers
             });
 
             var myDropzone7 = new Dropzone("#dropzone7", {
-                url: "/allexchange/public/photos",
+                url: url,
                 maxFiles: 1,
                 dictDefaultMessage: "Загрузите фото 7",
                 paramName: "file7",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
+                headers: xsrf_token_headers
             });
 
             var myDropzone8 = new Dropzone("#dropzone8", {
-                url: "/allexchange/public/photos",
+                url: url,
                 maxFiles: 1,
                 dictDefaultMessage: "Загрузите фото 8",
                 paramName: "file8",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
+                headers: xsrf_token_headers
             });
 
         });
+    </script>
+
+
+    <script>
+        $(function() {
+
+            //serviceUpdate();
+
+            switchSelect('brand', true);
+            switchSelect('model', true);
+            switchSelect('category', true);
+
+            // Changement de pays
+            $('select[name="device_type"]').on('change', function(e) {
+                switchSelect('brand', true);
+                switchSelect('model', true);
+                switchSelect('category', true);
+                //serviceUpdate();
+            });
+
+            $('select[name="brand"]').on('change', function(e) {
+                switchSelect('model', true);
+                switchSelect('category', true);
+                //serviceUpdate();
+            });
+
+
+            $('select[name="model"]').on('change', function(e) {
+                switchSelect('category', true);
+                //serviceUpdate();
+            });
+
+            /*
+                        $('select[name="service_address"]').on('change', function(e) {
+                            $('input[name="service_id"]').val($(this).val());
+@if(Auth::check() && Auth::user()->is_admin())
+            $('input[name="replaced"][value="1"]').prop("checked",true);
+            replaced
+@endif
+            });
+*/
+
+
+            function serviceUpdate(service_id) {
+                var param = {};
+
+                service_id = service_id || 0;
+                if(service_id) {
+                    param.service_id = service_id;
+                } else {
+                    param.name = $('select[name="service_name"] option:checked').val();
+                    param.branch = $('select[name="service_branch"] option:checked').val();
+                    param.city = $('select[name="service_city"] option:checked').val();
+                }
+
+
+                $.ajax({
+                    url: "/",
+                    type: "POST",
+                    data: param,
+                    beforeSend: function() {
+                        $('#loading').show();
+                    },
+                    complete: function() {
+                        $('#loading').hide();
+                    },
+                    error :function( jqXhr ) {
+                        if( jqXhr.status === 401 ) //redirect if not authenticated user.
+                            console.log('error 401');
+                        // $( location ).prop( 'pathname', 'auth/login' );
+                        if( jqXhr.status === 422 ) {
+                            //process validation errors here.
+                            var errors = jqXhr.responseJSON; //this will get the errors response data.
+                            //show them somewhere in the markup
+                            //e.g
+                            var str = "";
+
+                            $.each( errors, function( key, value ) {
+                                str += '<li>' + value[0] + '</li>'; //showing only the first error.
+                            });
+
+                            $('#error-list').html('<p>Исправьте ошибки</p>')
+                                .append('<ul>' + str + '</ul>').show(); // append the list
+                        } else {
+                            /// do some thing else
+                        }
+                    },
+                    success: function( response ) {
+                        if(response.errors) {
+                            var str = "";
+                            response.errors.forEach(function(error){
+                                str += '<li>' + error + '</li>' // build the list
+                            });
+                            $('#error-list').html('<p>Исправьте ошибки</p>')
+                                .append('<ul>' + str + '</ul>').show(); // append the list
+                        } else {
+                            $('#error-list').hide();
+                            if(response.brands){
+                                serviceSet('brand', response.brands, service_id ? 1 : 0);
+                            }
+                            if(response.models){
+                                serviceSet('model', response.models, service_id ? 1 : 0);
+                            }
+                            if(response.categories){
+                                serviceSet('category', response.categories, service_id ? 1 : 0);
+                            }
+
+                        }
+                    }
+                });
+            }
+
+
+            function switchSelect(el, disable) {
+                if(disable) {
+                    $('select[name="' + el + '"]').val(0).prop('selected', true).prop('disabled', 'disabled');
+                } else {
+                    $('select[name="' + el + '"]').prop('disabled', false);
+                }
+            }
+
+
+            function serviceSet(elementId, data, itemId) {
+                $('select[name="' + elementId + '"]').empty();
+
+                $.each(data, function(index, item) {
+                    $('select[name="' + elementId + '"]').append($('<option>', {
+                        value: index,
+                        text : item
+                    }));
+                });
+
+                if(itemId) {
+                    if(elementId == 'service_name') {
+                        var sNameId = $('input[name="service_name_id"]').val();
+                        $('select[name="' + elementId+ '"]').val(sNameId).prop('selected', true);
+                    }
+                    else $('select[name="' + elementId+ '"] option:last').prop('selected', true);
+                } else {
+                    $('input[name="service_id"]').val(0);
+                }
+                switchSelect(elementId, false);
+            }
+
+        });
+
+
+        //turn on the tooltip function
+        /*  $('[data-toggle="tooltip"]').tooltip(); */
+
     </script>
 @endsection

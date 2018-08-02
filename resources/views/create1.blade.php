@@ -137,7 +137,8 @@
     <script>
         $(function() {
 
-            serviceUpdate({{ old('service_id', $post->service_id) }});
+            serviceUpdate();
+            //serviceUpdate({{ old('service_id', $post->service_id) }});
             // Changement de pays
             $('select[name="service_name"]').on('change', function(e) {
                 switchSelect('service_branch', true);
