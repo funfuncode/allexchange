@@ -38,28 +38,28 @@
                     <div class="col-md-3">
 
                         <p id="dropzone1" class="dropzone"></p>
-                        <p class="text-center">Вид спереди</p>
+                        <p class="text-center photoDescription"></p>
 
                     </div>
 
                     <div class="col-md-3">
 
                         <p id="dropzone2" class="dropzone"></p>
-                        <p class="text-center">Вид сзади</p>
+                        <p class="text-center photoDescription">Вид сзади</p>
 
                     </div>
 
                     <div class="col-md-3">
 
                         <p id="dropzone3" class="dropzone"></p>
-                        <p class="text-center">Вид сбоку</p>
+                        <p class="text-center photoDescription">Вид сбоку</p>
 
                     </div>
 
                     <div class="col-md-3">
 
                         <p id="dropzone4" class="dropzone"></p>
-                        <p class="text-center">Вид 4</p>
+                        <p class="text-center photoDescription">Вид 4</p>
 
                     </div>
 
@@ -123,20 +123,40 @@
             const isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
             const isChromeOpera = isChrome || isOpera;
 
+            const dictDefaultMessage = "Перетащите фото устройства ";
+            const dictRemoveFile = "Удалить файл";
+
+            const photoDescription = "Фото устройства ";
+
             var myDropzone1 = new Dropzone("#dropzone1", {
                 url: url,
                 clickable: !isChromeOpera,
                 maxFiles: 1,
-                dictDefaultMessage: "Загрузите вид устройства спереди",
+                addRemoveLinks: true,
+                dictDefaultMessage: dictDefaultMessage + "спереди",
+                dictRemoveFile: dictRemoveFile,
                 paramName: "file1",
                 headers: xsrf_token_headers
             });
+
+            let i = 1;
+
+            myDropzone1.on("success", function(file, serverResponse) {
+                $(`#dropzone${i}`).siblings(".photoDescription").text(photoDescription + "спереди");
+            });
+
+            myDropzone1.on("removedfile", (file) => {
+                $(`#dropzone${i}`).siblings(".photoDescription").text("");
+            });
+
+
+
 
 
             var myDropzone2 = new Dropzone("#dropzone2", {
                 url: url,
                 maxFiles: 1,
-                dictDefaultMessage: "Загрузите вид устройства сзади",
+                dictDefaultMessage: dictDefaultMessage + "сзади",
                 paramName: "file2",
                 headers: xsrf_token_headers
             });
@@ -144,7 +164,7 @@
             var myDropzone3 = new Dropzone("#dropzone3", {
                 url: url,
                 maxFiles: 1,
-                dictDefaultMessage: "Загрузите вид устройства сбоку",
+                dictDefaultMessage: dictDefaultMessage + "сбоку",
                 paramName: "file3",
                 headers: xsrf_token_headers
             });
@@ -152,7 +172,7 @@
             var myDropzone4 = new Dropzone("#dropzone4", {
                 url: url,
                 maxFiles: 1,
-                dictDefaultMessage: "Загрузите вид устройства сверху",
+                dictDefaultMessage: dictDefaultMessage + "сверху",
                 paramName: "file4",
                 headers: xsrf_token_headers
             });
@@ -161,7 +181,7 @@
             var myDropzone5 = new Dropzone("#dropzone5", {
                 url: url,
                 maxFiles: 1,
-                dictDefaultMessage: "Загрузите фото 5",
+                dictDefaultMessage: dictDefaultMessage + "спереди 2",
                 paramName: "file5",
                 headers: xsrf_token_headers
             });
@@ -169,7 +189,7 @@
             var myDropzone6 = new Dropzone("#dropzone6", {
                 url: url,
                 maxFiles: 1,
-                dictDefaultMessage: "Загрузите фото 6",
+                dictDefaultMessage: dictDefaultMessage + "сзади 2",
                 paramName: "file6",
                 headers: xsrf_token_headers
             });
@@ -177,7 +197,7 @@
             var myDropzone7 = new Dropzone("#dropzone7", {
                 url: url,
                 maxFiles: 1,
-                dictDefaultMessage: "Загрузите фото 7",
+                dictDefaultMessage: dictDefaultMessage + "сбоку 2",
                 paramName: "file7",
                 headers: xsrf_token_headers
             });
@@ -185,7 +205,7 @@
             var myDropzone8 = new Dropzone("#dropzone8", {
                 url: url,
                 maxFiles: 1,
-                dictDefaultMessage: "Загрузите фото 8",
+                dictDefaultMessage: dictDefaultMessage + "сверху 2",
                 paramName: "file8",
                 headers: xsrf_token_headers
             });
