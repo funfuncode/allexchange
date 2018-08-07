@@ -66,27 +66,27 @@
                     <div class="col-md-3">
 
                         <p id="dropzone5" class="dropzone"></p>
-                        <p class="text-center">Вид 5</p>
+                        <p class="text-center photoDescription">Вид 5</p>
 
                     </div>
 
                     <div class="col-md-3">
 
                         <p id="dropzone6" class="dropzone"></p>
-                        <p class="text-center">Вид 6</p>
+                        <p class="text-center photoDescription">Вид 6</p>
 
                     </div>
                     <div class="col-md-3">
 
                         <p id="dropzone7" class="dropzone"></p>
-                        <p class="text-center">Вид 7</p>
+                        <p class="text-center photoDescription">Вид 7</p>
 
                     </div>
 
                     <div class="col-md-3">
 
                         <p id="dropzone8" class="dropzone"></p>
-                        <p class="text-center">Вид 8</p>
+                        <p class="text-center photoDescription">Вид 8</p>
 
                     </div>
                 </div>
@@ -128,7 +128,7 @@
 
             const photoDescription = "Фото устройства ";
 
-            var myDropzone1 = new Dropzone("#dropzone1", {
+          /*  var myDropzone1 = new Dropzone("#dropzone1", {
                 url: url,
                 clickable: !isChromeOpera,
                 maxFiles: 1,
@@ -138,19 +138,6 @@
                 paramName: "file1",
                 headers: xsrf_token_headers
             });
-
-            let i = 1;
-
-            myDropzone1.on("success", function(file, serverResponse) {
-                $(`#dropzone${i}`).siblings(".photoDescription").text(photoDescription + "спереди");
-            });
-
-            myDropzone1.on("removedfile", (file) => {
-                $(`#dropzone${i}`).siblings(".photoDescription").text("");
-            });
-
-
-
 
 
             var myDropzone2 = new Dropzone("#dropzone2", {
@@ -208,8 +195,30 @@
                 dictDefaultMessage: dictDefaultMessage + "сверху 2",
                 paramName: "file8",
                 headers: xsrf_token_headers
-            });
+            }); */
 
+            const myDropzones = [];
+
+            for(let i =1; i <= 8; i++){
+                myDropzones[i] = new Dropzone(`#dropzone${i}`, {
+                    url: url,
+                    clickable: !isChromeOpera,
+                    maxFiles: 1,
+                    addRemoveLinks: true,
+                    dictDefaultMessage: dictDefaultMessage + "спереди",
+                    dictRemoveFile: dictRemoveFile,
+                    paramName: `file${i}`,
+                    headers: xsrf_token_headers
+                });
+
+                myDropzones[i].on("success", (file, serverResponse) => {
+                    $(`#dropzone${i}`).siblings(".photoDescription").text(photoDescription + "спереди");
+                });
+
+                myDropzones[i].on("removedfile", (file) => {
+                    $(`#dropzone${i}`).siblings(".photoDescription").text("");
+                });
+            }
         });
     </script>
 
